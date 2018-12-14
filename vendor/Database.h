@@ -1,16 +1,16 @@
 #ifndef DATABASE_H
 #define DATABASE_H
+#define FILE_O "database.txt"
+#define FILE_T "temp.txt"
 #include <fstream>
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sstream>
-#include <sstream>
 #include <iterator>
 #include <string>
 using namespace std;
-// #include <ifstream>
-// #include <ofstream>
+
 
 struct  User{
 	std::string first_name;
@@ -56,6 +56,28 @@ public:
     file.close();
 		return user_collected;
   }
+
+	bool delete(string id){
+		string user = this->fetch(id);
+		string e_user;
+		file.open(FILE_O);
+		temp.open(FILE_T)
+		while(!file.eof()){
+			getline(file,e_user);
+			if(e_user == user){
+				continue;
+			}else{
+				temp << t_user << endl;
+			}
+		}
+		temp.close();
+		file.close();
+		remove("database.txt");
+		if(rename("temp.txt","database.txt")){
+			return true;
+		}
+		return false;
+	}
 
 
 	void update(User user){
