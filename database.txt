@@ -1,7 +1,2 @@
-Frank Ololo ComputerScience 1234 01010 200
-Frank Ololo ComputerScience 1234 11111 200
-Frank Ololo ComputerScience 1234 11111 200
-Frank Ololo ComputerScience 1234 11111 200
-Frank Ololo ComputerScience 1234 11111 200
-Frank Ololo ComputerScience 1234 11111 200
-Frank Ololo ComputerScience 1234 11111 200
+Agnes Oduro ComputerScience 1234 77777 300
+Frank Ampong ComputerScience 1234 010101 100
