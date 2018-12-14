@@ -58,25 +58,7 @@ public:
   }
 
 
-	void update(User user){
-		string e_user;
-		string t_user;
-		e_user = this->fetch(user.index);
-		cout << "Existing User : " << e_user << endl;
-		string n_user = user.first_name + " " + user.last_name + " " + user.department + " " + user.pin + " " + user.index + " " + user.level;
-		cout << "New User : " << n_user;
-		file.open("database.txt");
-		temp.open("temp.txt");
-		while(!file.eof()){
-			getline(file,t_user);
-			t_user.replace(t_user.find(e_user),n_user.length(),n_user);
-			temp << t_user << endl;
-		}
-		temp.close();
-		file.close();
-		// remove("database.txt");
-		// rename("temp.txt","database.txt");
-	}
+	
 
 
 		template <size_t N>
