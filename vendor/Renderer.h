@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include "Datatype.h"
 using namespace std;
 
 namespace Vendor{
@@ -11,7 +12,7 @@ namespace Vendor{
     system("cls");
     char input;
     cout << "##-------- Welcome to MIS --------##" << endl;
-    cout << "Enter as :\n1.Student\n2.Staff\nAdmin\nSelect an option (1 or 2 or 3) :";
+    cout << "Enter as :\n1.Student\n2.Staff\n3.Admin\nSelect an option (1 or 2 or 3) :";
     cin >> input;
     return input;
   }
@@ -20,6 +21,7 @@ namespace Vendor{
     system("cls");
     string index;
     string pin;
+    cout << "##-------- Login Credentials --------##" << endl;
     cout << " Enter a valid "<< input << " ID(MAX:8): ";
     cin >> index;
     cout << " Enter assciated pin to Index(" << index << ") : ";
@@ -27,10 +29,10 @@ namespace Vendor{
     return index + " " + pin;
   }
 
-  string student_UI(string id){
+  char student_UI(string id){
     system("cls");
     //variables if needed
-    string input;
+    char input;
     cout << "INDEX :: " << id << endl;
     cout << "##-------- MENU --------##" << endl;
     cout << "1.Add Course(s)\n2.Edit Course\n3.Delete Course\n4.View Courses\nMake a selection (1 or 2 or 3 or 4) :";
@@ -39,11 +41,20 @@ namespace Vendor{
   }
 
 
-  int staff_UI(){
+  char staff_UI(){
     system("cls");
-    int input;
+    char input;
     cout << "##-------- MENU --------##" << endl;
     cout << "1. Record Student grade \nSelect (1) to proceed : ";
+    cin >> input;
+    return input;
+  }
+
+  char admin_UI(){
+    system("cls");
+    char input;
+    cout << "##-------- MENU --------##" << endl;
+    cout << "1.Add Student\n2.Edit Student\n3.Delete Student\n4.Add Staff\n5.Edit Staff\n6.Delete Staff\nMake a choice (1 to 6) :";
     cin >> input;
     return input;
   }
@@ -52,6 +63,10 @@ namespace Vendor{
     return std::to_string(a);
   }
 
+  void collectStudentDetails(User& user){
+    system("cls");
+    cout << "##-------- Enter Details --------##" << endl;
+  }
 
 }
 

@@ -14,15 +14,17 @@ class Auth{
 private:
   std::string index;
   std::string pin;
+  std::string type;
   std::string user;
 public:
   Auth(){
     std::cout << "Auth class called .." << std::endl;
   }
 
-  string login(std::string index,std::string pin){
+  string login(std::string index,std::string pin,std::string type){
     this->index = index;
     this->pin = pin;
+    this->type = type;
     if(this->Authenticate()){
       return "Yes";
     }
@@ -35,7 +37,7 @@ public:
 
 protected:
   bool Authenticate(){
-    user = db.fetch(index);
+    user = db.fetch(index,pin,type);
     if(user.size() > 1){
       return true;
     }
