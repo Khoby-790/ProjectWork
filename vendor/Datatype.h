@@ -20,10 +20,11 @@ struct Course{
 
 struct StdCourse{
   std::string std_index;
-  std::string course_code;
-  std::string std_mark_IA;
-  std::string std_mark_EXAM;
-  std::string grade;
+	std::string course_code;
+  std::string course_title;
+  std::string std_mark_IA = "NA";
+  std::string std_mark_EXAM = "NA";
+  std::string grade = "NA";
 };
 
 

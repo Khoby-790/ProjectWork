@@ -1,2 +1,1 @@
-Agnes Oduro ComputerScience 1234 77777 300 admin
-Frank Ampong ComputerEngineering 1234 020202 200 student
+

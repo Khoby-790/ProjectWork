@@ -24,6 +24,9 @@ namespace Vendor{
     cout << "##-------- Login Credentials --------##" << endl;
     cout << " Enter a valid "<< input << " ID(MAX:8): ";
     cin >> index;
+    if(index == "q"){
+      exit(1);
+    }
     cout << " Enter assciated pin to Index(" << index << ") : ";
     cin >> pin;
     return index + " " + pin;
@@ -54,7 +57,7 @@ namespace Vendor{
     system("cls");
     char input;
     cout << "##-------- MENU --------##" << endl;
-    cout << "1.Add Student\n2.Edit Student\n3.Delete Student\n4.Add Staff\n5.Edit Staff\n6.Delete Staff\nMake a choice (1 to 6) :";
+    cout << "1.Add User\n2.Edit User\n3.Delete User\nMake a choice (1 to 3) : ";
     cin >> input;
     return input;
   }
@@ -63,9 +66,40 @@ namespace Vendor{
     return std::to_string(a);
   }
 
-  void collectStudentDetails(User& user){
+  void collectUserDetails(User& user){
     system("cls");
     cout << "##-------- Enter Details --------##" << endl;
+    cout << "Enter User's First Name : ";
+    cin >> user.first_name;
+    cout << "Enter User's Last Name : ";
+    cin >> user.last_name;
+    cout << "Enter User's Department(keep words together) : ";
+    cin >> user.department;
+    cout << "Enter User's preferred Index Number(8) : ";
+    cin >> user.index;
+    cout << "Enter User's preferred PIN(4) : ";
+    cin >> user.pin;
+    cout << "Enter the type of User (student|staff|admin) : ";
+    cin >> user.type;
+  }
+
+  void collectCourseDetails(StdCourse& course){
+    system("cls");
+    cout << "Enter Course Code : ";
+    cin >> course.course_code;
+    cout << "Enter course Title : ";
+    cin >> course.course_title;
+  }
+
+  void collectUserToEdit(User& user){
+    system("cls");
+    cout << "##-------- Enter Details --------##" << endl;
+    cout << "Enter User's First Name : ";
+    cin >> user.first_name;
+    cout << "Enter User's Last Name : ";
+    cin >> user.last_name;
+    cout << "Enter User's preferred PIN(4) : ";
+    cin >> user.pin;
   }
 
 }
