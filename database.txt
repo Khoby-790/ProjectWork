@@ -1,2 +1,4 @@
-Agnes Oduro ComputerScience 1234 77777 300
-Frank Ampong ComputerScience 1234 010101 100
+Agnes Oduro ComputerScience 1234 77777 300 admin
+Emmanuel Baidoo Computer 1234 020202 200 student
+Geaorge Aboagye Sociology q q Sociology student
+Regina Sankofa Mathematics 1234 33333 NA staff
