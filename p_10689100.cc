@@ -109,7 +109,7 @@ int main(int argc, char const *argv[]) {
               system("pause");
               break;
           }
-        }while(choice != 'q' || choice != 'Q');
+        }while(choice_3 != 'q' || choice_3 != 'Q');
       }
       break;
   }
