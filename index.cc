@@ -7,11 +7,12 @@ using namespace Vendor;
 
 //global variables
 char input,choice_1,choice_3,choice_2;
-string login_input,input_arr[2],login_response,user_to_edit;
+string login_input,input_arr[2],login_response,user_to_edit,user_id,course_code;
 Database database;
 Auth auth;
 User user;
 StdCourse course;
+bool check;
 
 int main(int argc, char const *argv[]) {
   input = first_layout();
@@ -40,8 +41,18 @@ int main(int argc, char const *argv[]) {
               database.update(course);
               system("pause");
               break;
+            case '3':
+              cout << "Enter course code of course to edit : ";
+              cin >> user_to_edit;
+              database._delete(user_to_edit,input_arr[0]);
+              system("pause");
+              break;
+            case '4':
+                database.view_courses(input_arr[0]);
+                system("pause");
+              break;
           }
-        }while(choice_1 != 'q');
+        }while(choice_1 != 'q' || choice_1 != 'Q');
       }
       break;
     case '2':
@@ -54,10 +65,17 @@ int main(int argc, char const *argv[]) {
             choice_2 = staff_UI();
             switch (choice_2) {
               case '1':
-
+                collectScoreDetails(user_id,course_code,user_to_edit);
+                check = database.assign_IA_marks(user_id,course_code,user_to_edit);
+                assignment_response(check,"IA",user_id);
+                break;
+              case '2':
+                collectScoreDetails(user_id,course_code,user_to_edit,2);
+                check = database.assign_EXAM_marks(user_id,course_code,user_to_edit);
+                assignment_response(check,"EXAM",user_id);
                 break;
             }
-          }while(choice_2 != 'q');
+          }while(choice_2 != 'q' || choice_2 != 'Q');
         }
       }while(login_response != "Yes");
       break;
@@ -91,10 +109,10 @@ int main(int argc, char const *argv[]) {
               system("pause");
               break;
           }
-        }while(choice_3 != 'q');
+        }while(choice != 'q' || choice != 'Q');
       }
       break;
   }
-}while(input != 'q');
+}while(input != 'q' || input != 'Q');
   return 0;
 }

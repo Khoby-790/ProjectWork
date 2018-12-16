@@ -13,7 +13,7 @@
 #include "File.h"
 using namespace std;
 
-
+std::string::size_type sz;
 
 
 class Database : File{
@@ -70,6 +70,35 @@ public:
   }
 
 
+  string fetch(std::string course_code,int one){
+		std::string course_collected;
+    file.open(FILE_CO);
+    while(!file.eof()){
+      getline(file,course_collected);
+      splitString(arr,course_collected);
+			if(arr[1] == course_code){
+				break;
+			}
+    }
+    file.close();
+		return course_collected;
+  }
+
+  string fetch(std::string course_code,string user_id){
+		std::string course_collected;
+    file.open(FILE_CO);
+    while(!file.eof()){
+      getline(file,course_collected);
+      splitString(arr,course_collected);
+			if(arr[1] == course_code && arr[0] == user_id){
+				break;
+			}
+    }
+    file.close();
+		return course_collected;
+  }
+
+
   void fetch(std::string user_id,User& user){
 		std::string user_collected;
     file.open(FILE_O);
@@ -105,6 +134,21 @@ public:
         course.std_mark_EXAM;
         course.grade;
         break;
+      }
+    }
+    file.close();
+  }
+
+  void view_courses(string user_id){
+    string course_collected;
+    file.open(FILE_CO);
+    cout << "Courses offered by " << user_id << endl;
+    while(!file.eof()){
+      getline(file,course_collected);
+      splitString(arr,course_collected);
+      if(arr[0] == user_id){
+        course_collected = arr[1] + " " + arr[2];
+        cout << course_collected << endl;
       }
     }
     file.close();
@@ -150,6 +194,28 @@ public:
 	}
 
 
+  void _delete(string course_code,string user_id){
+		string course = this->fetch(course_code,1);
+		string e_course;
+		file.open(FILE_CO);
+		temp.open(FILE_T);
+		while(!file.eof()){
+			getline(file,e_course);
+      splitString(arr,e_course);
+			if(e_course == course && arr[0] == user_id){
+				continue;
+			}else{
+				temp << e_course << endl;
+			}
+		}
+		temp.close();
+		file.close();
+		remove(FILE_CO);
+		rename(FILE_T,FILE_CO);
+		cout << "Course deleted successfully .. " << endl;
+	}
+
+
 
 
 	//update methods
@@ -182,7 +248,7 @@ public:
   void update(StdCourse course){
 		string e_course;
 		string t_course;
-		e_course = this->fetch(course.course_code);
+		e_course = this->fetch(course.course_code,1);
 		cout << "Old Course : " << e_course << endl;
     string n_course = course.std_index + " " + course.course_code + " " + course.course_title + " " + course.std_mark_IA + " " + course.std_mark_EXAM + " " + course.grade;
 		cout << "New Course : " << n_course << endl;
@@ -202,6 +268,48 @@ public:
 	}
 
 
+  //IA marks assingment
+
+  bool assign_IA_marks(string user_id,string course_code,string IA_mark){
+    string course = fetch(course_code,user_id);
+    if(course.size() > 0){
+      splitString(arr,course);
+      arr[3] = IA_mark;
+      StdCourse course;
+      course.std_index = arr[0];
+      course.course_code = arr[1];
+      course.course_title = arr[2];
+      course.std_mark_IA = arr[3];
+      course.std_mark_EXAM = arr[4];
+      course.grade = arr[5];
+      this->update(course);
+      return true;
+    }
+    return false;
+  }
+
+  bool assign_EXAM_marks(string user_id,string course_code,string EXAM_mark){
+    int sum,ia,exam;
+    string course = fetch(course_code,user_id);
+    if(course.size() > 0){
+      splitString(arr,course);
+      arr[4] = EXAM_mark;
+      StdCourse course;
+      course.std_index = arr[0];
+      course.course_code = arr[1];
+      course.course_title = arr[2];
+      course.std_mark_IA = arr[3];
+      ia = std::stoi(arr[3],&sz);
+      course.std_mark_EXAM = arr[4];
+      exam = std::stoi(arr[4],&sz);
+      sum = ia + exam;
+      course.grade = this->grading(sum);
+      this->update(course);
+      return true;
+    }
+    return false;
+  }
+
 		template <size_t N>
 		void splitString(string (&arr)[N], string str){
 		    int n = 0;
@@ -209,6 +317,30 @@ public:
 		    for (auto it = istream_iterator<string>(iss); it != istream_iterator<string>() && n < N; ++it, ++n)
 		        arr[n] = *it;
 		}
+
+    string grading(int sum){
+      if(sum > 79 && sum < 100){
+        return "A";
+      }else if(sum > 74 && sum < 80){
+        return "B+";
+      }else if(sum > 69 && sum < 75){
+        return "B";
+      }else if(sum > 64 && sum < 70){
+        return "C+";
+      }else if(sum > 59 && sum < 65){
+        return "C";
+      }else if(sum > 54 && sum < 60){
+        return "D+";
+      }else if(sum > 49 && sum < 55){
+        return "D";
+      }else if(sum > 44 && sum < 50){
+        return "E";
+      }else if(sum > -1 && sum < 45){
+        return "F";
+      }else{
+        return "NA";
+      }
+    }
 
   ~Database(){
 		cout << "Database class terminated" << endl;

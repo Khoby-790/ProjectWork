@@ -1,2 +1,6 @@
-020202 UGRC120 AcademicWriting NA NA NA
-020202 CSCD201 Architecture NA NA NA
+020202 CSCD201 InformationSystems 26 57 A
+
+
+
+
+
