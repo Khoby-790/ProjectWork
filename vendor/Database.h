@@ -1,8 +1,8 @@
 #ifndef DATABASE_H
 #define DATABASE_H
-#define FILE_O "database.txt"
-#define FILE_CO "database_course.txt"
-#define FILE_T "temp.txt"
+#define FILE_O "Model/database.txt"
+#define FILE_CO "Model/database_course.txt"
+#define FILE_T "Model/temp.txt"
 #include <fstream>
 #include <iostream>
 #include <stdio.h>

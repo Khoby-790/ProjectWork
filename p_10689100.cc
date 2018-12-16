@@ -36,7 +36,7 @@ int main(int argc, char const *argv[]) {
             case '2':
               cout << "Enter course code of course to edit : ";
               cin >> user_to_edit;
-              database.fetch(user_to_edit,course,input_arr[0]);
+              database.fetch(user_to_edit,course);
               collectCourseDetails(course);
               database.update(course);
               system("pause");
