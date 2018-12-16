@@ -171,9 +171,6 @@ public:
   }
 
 
-<<<<<<< HEAD
-	
-=======
 	//delete methods
 
 	void _delete(string id){
@@ -244,7 +241,6 @@ public:
 		remove(FILE_O);
 		rename(FILE_T,FILE_O);
 	}
->>>>>>> 23ef36ac456f3b9c9cd6b438d4493f0534ee920c
 
 
   //update the course
